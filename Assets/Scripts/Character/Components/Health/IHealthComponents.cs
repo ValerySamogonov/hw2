@@ -1,4 +1,4 @@
-public Interface IHealthComponents
+public interface IHealthComponents
 {
     
     float Health {get;}

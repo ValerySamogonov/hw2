@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public Interface IMovementComponent 
+public interface IMovementComponent 
 {
     float Speed {get; set;}
 
