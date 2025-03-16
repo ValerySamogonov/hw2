@@ -1,10 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public Interface IMovementComponent 
+public interface IMovementComponent 
 {
     float Speed {get; set;}
 
-    Vector3 Position{get;}
+    Vector3 Position {get;}
+
+    void Initialize(CharacterData characterData);
 
     void Move(Vector3 direction);
 

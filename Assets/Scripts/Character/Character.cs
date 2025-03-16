@@ -4,8 +4,15 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    public IHealthComponents HealthComponent {get; protected set;}
 
+        [SerializeField]
+    private CharacterData characterData;
+
+
+
+    public IHealthComponents HealthComponent {get; protected set;}
+    public IMovementComponent MovementComponent {get; protected set;}
+	public IAttackComponent AttackComponent {get; protected set;}
 
 
 
@@ -13,13 +20,17 @@ public abstract class Character : MonoBehaviour
     public virtual void Initialize()
     {
 
-        Debug.Log("Character initialized!");
+        MovementComponent = new DefaultMovementComponent();
+        MovementComponent.Initialize(characterData);
+		AttackComponent = new AttackComponent();
+		AttackComponent.Initialize(characterData);
+
 
     }
     
-    void Start()
+   private void Start()
     {
         Initialize();
     }
-
+protected abstract void Update();
 }

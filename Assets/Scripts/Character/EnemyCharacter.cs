@@ -1,16 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCharacter : MonoBehaviour
+public class EnemyCharacter : Character
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] 
+    private Character characterTarget;
+    [SerializeField] 
+    private AiState aiState;
+    public override void Initialize()
     {
-        
+        base.Initialize();
+        HealthComponent = new HealthComponent();
     }
 
-    // Update is called once per frame
-    void Update()
+   protected override void Update()
     {
-        
+        if (HealthComponent.Health <= 0)
+            return;
+
+
+        switch (aiState)
+        {
+            case AiState.Idle:
+                
+                return;
+            
+                
+            case AiState.MoveToTarget:
+                Vector3 moveDirection = characterTarget.transform.position - transform.position;
+                moveDirection.Normalize();
+                
+                MovementComponent.Move(moveDirection);
+                MovementComponent.Rotation(moveDirection);
+                
+                AttackComponent.MakeDamage(characterTarget);
+                return;
+        }
     }
 }
