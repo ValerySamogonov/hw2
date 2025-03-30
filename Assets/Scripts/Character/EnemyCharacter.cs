@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCharacter : Character
@@ -19,13 +17,10 @@ public class EnemyCharacter : Character
         if (HealthComponent.Health <= 0)
             return;
 
-
         switch (aiState)
         {
             case AiState.Idle:
-                
                 return;
-            
                 
             case AiState.MoveToTarget:
                 Vector3 moveDirection = characterTarget.transform.position - transform.position;

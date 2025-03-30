@@ -2,35 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthComponent : IHealthComponents 
+public class HealthComponent : IHealthComponents
 {
-    private float health;
-    private float maxHealth = 100;
-   public float Health 
-   {
-    get
-   {
-        return health;
-   }
-   private set
-   {
-    health = Mathf.Clamp(value, 0, MaxHealth);
-    if (health == 0)
-    SetDeath();
-   }
-   }
+    private float health = 100f;
+    private float maxHealth = 100f;
 
-   public float MaxHealth => maxHealth;
+    public float Health
+    {
+        get => health;
+        private set
+        {
+            health = Mathf.Clamp(value, 0, MaxHealth);
+            if (health <= 0)
+            {
+                SetDeath();
+                // showUiGameOver();
+            }
+        }
+    }
+
+    public float MaxHealth => maxHealth;
 
 
-   public void SetDamage(int damage)
-   {
+    public void SetDamage(int damage)
+    {
         Health -= damage;
-   }
+    }
 
 
-   private void SetDeath()
-   {
-    Debug.LogError("HealthComponent.SetDeath called");
-   }
+    private void SetDeath()
+    {
+        Debug.LogError("Character is dead");
+    }
 }
