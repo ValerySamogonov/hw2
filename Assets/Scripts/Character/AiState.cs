@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public enum AiState     
 {
     Idle = 0,
